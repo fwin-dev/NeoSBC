@@ -1,0 +1,41 @@
+[System]
+firewall: PF
+
+[Data_Plane]
+instances: 1
+type: Signaling
+
+[Zone_Insecure]
+dataplane: 1
+seczone: outside
+fw_interface: em0
+nat_ip: 192.168.56.176
+nat_port: 5060
+sip_ip: 127.0.0.1
+sip_port: 5065
+
+[Zone_Secure]
+dataplane: 1
+seczone: inside
+fw_interface: em0
+nat_ip: 192.168.56.176
+nat_port: 5060
+sip_ip: 127.0.0.1
+sip_port: 5066
+
+[Security]
+esinet_in: permit for ^sip:(\w+)@192.168.56.189(;.*|$) or ^sip:(\w+)@openrpr.org(;.*|$) on outside to inside as sip:%1@openrpr.org using 192.168.56.172:5060
+emergency_in: permit for ^sip:911@192.168.56.189(;.*|$) or ^sip:911@openrpr.org(;.*|$) on outside to inside as sip:%1@openrpr.org using 192.168.56.172:5060
+information: deny for ^sip:411@192.168.56.189(;.*|$) or ^sip:411@openrpr.org(;.*|$) on outside
+
+[Redundancy]
+startup: primary
+listener_ip: 192.168.56.176
+listener_port: 9089
+# [Redundancy]
+# startup: backup
+# partner: 192.168.56.177:9089
+
+[MSRP_Proxy]
+ip:192.268.56.189
+port: 8080
