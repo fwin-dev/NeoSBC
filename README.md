@@ -1,3 +1,10 @@
+## Installation
+If your systems default python version is 3 replace the python commands with python2
+
+To install NeoSBC run python setup.py install
+
+To install for development run python setup.py develop
+
 ## BIG TODOs
 
 1. Move the Call_Store used to hold onto past messages and related states of the message/call into its own class
