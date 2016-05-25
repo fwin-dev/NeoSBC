@@ -5,6 +5,9 @@ To install NeoSBC run python setup.py install
 
 To install for development run python setup.py develop
 
+## Running NeoSBC
+To start the SBC run python control_plane.py
+
 ## BIG TODOs
 
 1. Move the Call_Store used to hold onto past messages and related states of the message/call into its own class
